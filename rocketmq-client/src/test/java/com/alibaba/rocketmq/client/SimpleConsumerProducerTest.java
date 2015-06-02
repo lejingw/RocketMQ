@@ -25,11 +25,16 @@ public class SimpleConsumerProducerTest {
     public void producerConsumerTest() throws MQClientException, InterruptedException {
         System.setProperty("rocketmq.namesrv.domain", "jmenv.tbsite.alipay.net");
 
+        System.setProperty("rocketmq.namesrv.addr", "192.168.0.22:9876");
+
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("S_fundmng_demo_producer");
         DefaultMQProducer producer = new DefaultMQProducer("P_fundmng_demo_producer");
 
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         consumer.subscribe(TOPIC_TEST, null);
+
+//        producer.setNamesrvAddr("192.168.0.22:9876");
+//        consumer.setNamesrvAddr("192.168.0.22:9876");
 
         final AtomicLong lastReceivedMills = new AtomicLong(System.currentTimeMillis());
 
